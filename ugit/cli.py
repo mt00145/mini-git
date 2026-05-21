@@ -26,6 +26,14 @@ def parse_args():
     cat_file_parser.set_defaults(func=cat_file)
     cat_file_parser.add_argument('object')
 
+    write_tree_parser = commands.add_parser('write-tree')
+    write_tree_parser.set_defaults(func=write_tree)
+
+    read_tree_parser = commands.add_parser('read-tree')
+    read_tree_parser.set_defaults(func=read_tree)
+    read_tree_parser.add_argument('tree')
+
+
     return parser.parse_args()
 
 def init(args):
@@ -40,5 +48,8 @@ def cat_file(args):
     sys.stdout.flush()
     sys.stdout.buffer.write(data.get_object(args.object, expected=None))
 
-def write_tree (args):
-    print (base.write_tree ())
+def write_tree(args):
+    print(base.write_tree())
+
+def read_tree(args):
+    base.read_tree(args.tree)
